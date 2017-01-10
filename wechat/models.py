@@ -34,6 +34,7 @@ class Activity(models.Model):
     STATUS_PUBLISHED = 1
 
 
+
 class Ticket(models.Model):
     student_id = models.CharField(max_length=32, db_index=True)
     unique_id = models.CharField(max_length=64, db_index=True, unique=True)

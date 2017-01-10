@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 from wechat.wrapper import WeChatHandler
-
+import re
 
 __author__ = "Epsirom"
 
@@ -65,3 +65,16 @@ class BookEmptyHandler(WeChatHandler):
 
     def handle(self):
         return self.reply_text(self.get_message('book_empty'))
+
+class HelpHandler(WeChatHandler):
+
+    def check(self):
+        s = self.input.get("Content")
+        rex = r'^[1234567890\+\-\*/\(\)]*'
+        return s == re.match(rex,s).group(0)
+
+    def handle(self):
+        try:
+            return self.reply_text(eval(self.input.get("Content")))
+        except:
+            return self.reply_text('Wrong input!')
